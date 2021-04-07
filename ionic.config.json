@@ -1,0 +1,7 @@
+{
+  "name": "Resolutioneo",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
