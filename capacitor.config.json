@@ -4,6 +4,7 @@
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
+  "windowsAndroidStudioPath": "E:\\Logiciels\\portapps\\android-studio-portable\\android-studio-portable.exe",
   "plugins": {
     "SplashScreen": {
       "launchShowDuration": 0
