@@ -9,4 +9,26 @@
 
 <ion-content>
 
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" [routerLink]="['/choose-resolution-type']">
+    <ion-fab-button color="primary">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-list>
+    <ion-item *ngFor="let resolution of resolutions" [routerLink]="['/details', resolution]" lines="none">
+      <ion-card>
+        <ion-img [src]="resolution.image"></ion-img>
+        <ion-card-header>
+          <ion-card-title>{{resolution.nom}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+            Progression {{resolution.periodiciteString}} : 1/1
+          <ion-progress-bar value="0.4"></ion-progress-bar>
+        </ion-card-content>
+                
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
 </ion-content>

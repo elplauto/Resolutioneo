@@ -22,6 +22,10 @@ const routes: Routes = [
   {
     path: 'mygroups',
     loadChildren: () => import('./mygroups/mygroups.module').then( m => m.MygroupsPageModule)
+  },
+  {
+    path: 'choose-resolution-type',
+    loadChildren: () => import('./choose-resolution-type/choose-resolution-type.module').then( m => m.ChooseResolutionTypePageModule)
   }
 ];
 
