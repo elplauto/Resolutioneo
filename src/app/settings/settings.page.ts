@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +9,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  constructor(private storage: Storage, public toastController: ToastController) {}
 
-  ngOnInit() {
+
+  async ngOnInit() {
+    await this.storage.create();
   }
+
+  async resetResolutions() {
+    await this.storage.remove("resolutions");
+    this.presentToast("Résolutions réinitialisées avec succès");
+  }
+
+  async resetGroups() {
+    await this.storage.remove("groups");
+    this.presentToast("Groupes réinitialisés avec succès");
+  }
+
+  async resetAll() {
+    await this.storage.remove("resolutions");
+    await this.storage.remove("groups");
+    this.presentToast("Données réinitialisées avec succès");
+  }
+
+  async presentToast(message) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: "success"
+    });
+    toast.present();
+  }
+
+
 
 }

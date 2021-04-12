@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ResolutionsService } from '../api/resolutions.service';
 import { Resolution } from '../model/Resolution';
+import { Storage } from '@ionic/storage-angular';
 
 @Component({
   selector: 'app-myresolutions',
@@ -12,9 +13,18 @@ export class MyresolutionsPage implements OnInit {
   resolutionsService: ResolutionsService
   resolutions: Resolution[]
 
-  constructor(private route: Router) { }
+  placeholders: any = {
+    progression: ["Progression", "Progression", "Limite", null]
+  }
 
-  ngOnInit() {
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private storage: Storage) {}
+
+  async ngOnInit() {
+    await this.storage.create();
+    this.loadResolutions();
+  }
+
+  async ionViewDidEnter() {
     this.loadResolutions();
   }
 
@@ -25,6 +35,12 @@ export class MyresolutionsPage implements OnInit {
       this.resolutions = resolutions
     } catch(err) {
       console.log(err)
+    }
+    let createdResolutions = await this.storage.get('resolutions');
+    if (createdResolutions) {
+      for (let i = 0; i < createdResolutions.length; i++) {
+        this.resolutions.push(createdResolutions[i]);
+      }
     }
   }
 

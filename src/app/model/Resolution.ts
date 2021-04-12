@@ -5,6 +5,7 @@ import { ResolutionTypesEnum } from "./ResolutionTypesEnum";
 
 export class Resolution{
     nom: string;
+    notes: string;
     type: ResolutionTypesEnum;
     periodicite: Periodicity;
     categorie: Category;
@@ -16,10 +17,12 @@ export class Resolution{
     progression: {
         objectif: number,
         initial: number,
-        actuel: number
+        actuel: number,
+        unite: string
     }
 
     constructor(nom: string,
+                notes: string,
                 type: ResolutionTypesEnum,
                 periodicite: Periodicity,
                 categorie: Category,
@@ -27,9 +30,11 @@ export class Resolution{
                 dateDebut: Date,
                 objectif: number,
                 initial: number,
-                actuel: number
+                actuel: number,
+                unite: string
                 ){
         this.nom = nom;
+        this.notes = notes;
         this.type = type;
         this.periodicite = periodicite;
         this.categorie = categorie;
@@ -40,7 +45,8 @@ export class Resolution{
         this.progression = {
             objectif: objectif,
             initial: initial,
-            actuel: actuel
+            actuel: actuel,
+            unite: unite
         }
         this.image = "assets/images/" + this.categorieString + ".jpg"
     }

@@ -14,6 +14,7 @@ export class ResolutionsService {
   constructor() { 
     this.resolutions = [
       new Resolution("Courir 3 fois par semaine",
+        "Notes",
         ResolutionTypesEnum.NB_ACTIONS,
         Periodicity.Hebdomadaire,
         Category.Sport,
@@ -21,9 +22,11 @@ export class ResolutionsService {
         new Date(),
         3,
         0,
-        2),
+        2,
+        "fois"),
 
       new Resolution("Se limiter à un fastfood par mois",
+        "Notes",
         ResolutionTypesEnum.RESTRICTION,
         Periodicity.Mensuelle,
         Category.Alimentation,
@@ -31,9 +34,11 @@ export class ResolutionsService {
         new Date(),
         1,
         0,
-        0),
+        0,
+        "fois"),
 
         new Resolution("Faire tous mes devoirs 2 jours à l'avance",
+        "Notes",
         ResolutionTypesEnum.PERMANENT,
         null,
         Category.Travail,
@@ -41,9 +46,11 @@ export class ResolutionsService {
         null,
         0,
         0,
-        0),
+        0,
+        null),
 
         new Resolution("Perdre du poids",
+        "Notes",
         ResolutionTypesEnum.GOAL,
         null,
         Category.Sante,
@@ -51,9 +58,11 @@ export class ResolutionsService {
         new Date,
         70,
         90,
-        80),
+        80,
+        "kg"),
 
         new Resolution("Faire du sport tous les jours",
+        "Notes",
         ResolutionTypesEnum.NB_ACTIONS,
         Periodicity.Quotidienne,
         Category.Sport,
@@ -61,7 +70,8 @@ export class ResolutionsService {
         new Date(),
         1,
         0,
-        0)
+        0,
+        "fois")
         
     ]
   }

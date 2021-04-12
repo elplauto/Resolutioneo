@@ -23,10 +23,9 @@
           <ion-card-title>{{resolution.nom}}</ion-card-title>
         </ion-card-header>
         <ion-card-content *ngIf="resolution.type != 3">
-            Progression {{resolution.periodiciteString}} : {{resolution.progression.actuel}} / {{resolution.progression.objectif}}
+            {{placeholders.progression[resolution.type]}} {{resolution.periodiciteString}} : {{resolution.progression.actuel}} / {{resolution.progression.objectif}} {{resolution.progression.unite}}
           <ion-progress-bar [value]="resolution.progress"></ion-progress-bar>
         </ion-card-content>
-                
       </ion-card>
     </ion-item>
   </ion-list>
