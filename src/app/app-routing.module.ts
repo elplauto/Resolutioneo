@@ -26,6 +26,10 @@ const routes: Routes = [
   {
     path: 'choose-resolution-type',
     loadChildren: () => import('./choose-resolution-type/choose-resolution-type.module').then( m => m.ChooseResolutionTypePageModule)
+  },
+  {
+    path: 'create-resolution/:id',
+    loadChildren: () => import('./create-resolution/create-resolution.module').then( m => m.CreateResolutionPageModule)
   }
 ];
 

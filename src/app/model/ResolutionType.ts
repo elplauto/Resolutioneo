@@ -11,5 +11,4 @@ export class ResolutionType {
         this.color = color
     }
 
-
 }

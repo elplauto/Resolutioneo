@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Création de résolution</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Nom de la résolution</ion-label>
+      <ion-input type="text" [(ngModel)]="nom" placeholder="Ex: Perdre du poids"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Objectif</ion-label>
+      <ion-input type="number" [(ngModel)]="objectif" placeholder="Ex: 80 kg"
+      (keypress)="numberOnlyValidation($event)"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Point de départ</ion-label>
+      <ion-input type="number" [(ngModel)]="initial" placeholder="Ex: 90 kg"
+      (keypress)="numberOnlyValidation($event)"></ion-input>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Notes</ion-label>
+      <ion-textarea [(ngModel)]="notes"  placeholder="Ex: Ne pas perdre plus d'un kilo par semaine" clearOnEdit="true"></ion-textarea>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Fréquence</ion-label>
+      <ion-select [(ngModel)]=selectedFrequence cancelText="Annuler">
+        <ion-select-option *ngFor="let frequence of frequences; let i = index" [value]=i>{{frequence}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+    
+  <ion-card>
+    <ion-item>
+      <ion-label>Catégorie</ion-label>
+      <ion-select [(ngModel)]=selectedCategorie cancelText="Annuler">
+        <ion-select-option *ngFor="let categorie of categories; let i = index" [value]=i>{{categorie}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Priorité</ion-label>
+      <ion-select [(ngModel)]=selectedPriorite cancelText="Annuler">
+        <ion-select-option *ngFor="let priorite of priorites; let i = index" [value]=i>{{priorite}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+  
+  <ion-card>
+    <ion-item>
+      <ion-label>Date de début</ion-label>
+      <ion-datetime [(ngModel)]="date" displayFormat="DDDD D MMM YYYY" [min]="minDate" [max]="maxDate" [value]="minDate"></ion-datetime>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Heure</ion-label>
+      <ion-datetime [(ngModel)]="heure" displayFormat="HH:mm" [value]="minDate"></ion-datetime>
+    </ion-item>
+
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Activer les rappels</ion-label>
+      <ion-toggle [(ngModel)]="notificationOn"></ion-toggle>
+    </ion-item>
+  </ion-card>
+
+<ion-button expand="block">CRÉER</ion-button>
+
+</ion-content>

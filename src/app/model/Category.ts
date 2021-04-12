@@ -1,4 +1,6 @@
 export enum Category {
     Sport,
-    Alimentation
+    Alimentation,
+    Travail,
+    Sante
 }

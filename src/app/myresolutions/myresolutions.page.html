@@ -22,9 +22,9 @@
         <ion-card-header>
           <ion-card-title>{{resolution.nom}}</ion-card-title>
         </ion-card-header>
-        <ion-card-content>
-            Progression {{resolution.periodiciteString}} : 1/1
-          <ion-progress-bar value="0.4"></ion-progress-bar>
+        <ion-card-content *ngIf="resolution.type != 3">
+            Progression {{resolution.periodiciteString}} : {{resolution.progression.actuel}} / {{resolution.progression.objectif}}
+          <ion-progress-bar [value]="resolution.progress"></ion-progress-bar>
         </ion-card-content>
                 
       </ion-card>

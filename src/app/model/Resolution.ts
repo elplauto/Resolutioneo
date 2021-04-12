@@ -1,28 +1,62 @@
 import { Category } from "./Category";
 import { Periodicity } from "./Periodicity";
 import { Priority } from "./Priority";
+import { ResolutionTypesEnum } from "./ResolutionTypesEnum";
 
-export class Resolution {
+export class Resolution{
     nom: string;
+    type: ResolutionTypesEnum;
     periodicite: Periodicity;
     categorie: Category;
-    dateDebut: Date;
     priorite: Priority;
+    dateDebut: Date;
     image: string;
     categorieString: string;
     periodiciteString: string;
-
-    constructor(nom: string, periodicite: Periodicity, categorie: Category, dateDebut: Date,
-        priorite: Priority){
-        this.nom = nom;
-        this.periodicite = periodicite;
-        this.categorie = categorie;
-        this.dateDebut = dateDebut;
-        this.priorite = priorite;
-        this.categorieString = Category[this.categorie];
-        this.image = "assets/images/" + this.categorieString + ".jpg"
-        this.periodiciteString = Periodicity[this.periodicite]
+    progression: {
+        objectif: number,
+        initial: number,
+        actuel: number
     }
 
+    constructor(nom: string,
+                type: ResolutionTypesEnum,
+                periodicite: Periodicity,
+                categorie: Category,
+                priorite: Priority,
+                dateDebut: Date,
+                objectif: number,
+                initial: number,
+                actuel: number
+                ){
+        this.nom = nom;
+        this.type = type;
+        this.periodicite = periodicite;
+        this.categorie = categorie;
+        this.priorite = priorite;
+        this.dateDebut = dateDebut;
+        this.categorieString = Category[this.categorie];
+        this.periodiciteString = Periodicity[this.periodicite]
+        this.progression = {
+            objectif: objectif,
+            initial: initial,
+            actuel: actuel
+        }
+        this.image = "assets/images/" + this.categorieString + ".jpg"
+    }
+
+    get progress() {
+        let progress;
+        if(this.progression.initial <= this.progression.objectif) {
+            let rel_prog = this.progression.actuel - this.progression.initial;
+            let rel_obj = this.progression.objectif - this.progression.initial;
+            progress = rel_prog / rel_obj;
+        } else {
+            let rel_prog = this.progression.actuel - this.progression.objectif;
+            let rel_init = this.progression.initial - this.progression.objectif;
+            progress = 1 - (rel_prog / rel_init);
+        }
+        return progress;
+     }
 
 }
