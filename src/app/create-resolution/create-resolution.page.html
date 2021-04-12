@@ -96,12 +96,7 @@
   <ion-card *ngIf="resolutionTypeNb != 3">
     <ion-item>
       <ion-label>Date de début</ion-label>
-      <ion-datetime [(ngModel)]="date" displayFormat="DDDD D MMM YYYY" [min]="minDate" [max]="maxDate" [value]="minDate"></ion-datetime>
-    </ion-item>
-
-    <ion-item *ngIf="resolutionTypeNb != 3"> 
-      <ion-label>Heure</ion-label>
-      <ion-datetime [(ngModel)]="heure" displayFormat="HH:mm" [value]="minDate"></ion-datetime>
+      <ion-datetime [(ngModel)]="date" displayFormat="DDDD D MMM YYYY" [min]="minDate" [max]="maxDate"></ion-datetime>
     </ion-item>
   </ion-card>
 
@@ -114,7 +109,7 @@
 
   <ion-card>
     <ion-item>
-      <ion-label position="stacked">Notes</ion-label>
+      <ion-label position="stacked">Notes (optionnel)</ion-label>
       <ion-textarea [(ngModel)]="notes" placeholder="Memo personnel"></ion-textarea>
     </ion-item>
   </ion-card>

@@ -26,14 +26,15 @@ export class CreateResolutionPage implements OnInit {
   selectedCategorie: number = 0;
   selectedPriorite: number = 0;
   notificationOn : boolean = true;
-  date: String;
-  heure: String;
+
+  heure: any;
   frequences: String[] = Object.keys(Periodicity).filter(k => typeof Periodicity[k as any] === "number");
   categories: String[] = Object.keys(Category).filter(k => typeof Category[k as any] === "number");
   priorites: String[] = Object.keys(Priority).filter(k => typeof Priority[k as any] === "number");
 
   minDate: string = new Date().toISOString();
-  maxData : any = (new Date()).getFullYear() + 3;
+  maxDate : any = (new Date()).getFullYear() + 3;
+  date: string = this.minDate;
 
   placeholders: any = {
     nom: ["Ex: Perdre du poids", "Ex: Manger 5 fruits et légumes par jour", "Ex: Ne pas manger du chocolat plus de 2 fois par semaine", "Ne pas s'énerver trop rapidement"],
@@ -64,11 +65,16 @@ export class CreateResolutionPage implements OnInit {
 
   checkForm() {
     if (!this.nom) {
-      this.presentToast("Le nom de la résolution n'est pas renseigné", "danger");
-      return ;
+      this.presentToast("Nom de la résolution non renseigné", "danger");
+    } else if (!this.objectif && this.resolutionTypeNb != 3) {
+      this.presentToast(this.placeholders.objectifTitre[this.resolutionTypeNb] + " non renseigné", "danger");
+    } else if (!this.unite && this.resolutionTypeNb == 0) {
+      this.presentToast("Unit énon renseignée", "danger");
+    } else if (!this.initial && this.resolutionTypeNb == 0) {
+      this.presentToast("Point de départ non renseigné", "danger");
+    } else {
+      this.createResolution();
     }
-
-    this.createResolution();
   }
 
   async createResolution() {
@@ -81,7 +87,9 @@ export class CreateResolutionPage implements OnInit {
     if (this.resolutionType != ResolutionTypesEnum.PERMANENT) {
       r_periodicity = Periodicity[Periodicity[this.selectedFrequence]];
       if (r_periodicity == Periodicity.Unique) r_periodicity = null;
-      r_dateDeb = new Date();
+      r_dateDeb = new Date(this.date);
+      console.log(r_dateDeb);
+      console.log(this.date);
       r_objectif = this.objectif;
       r_initial = this.resolutionTypeNb == ResolutionTypesEnum.GOAL ? this.initial : 0
       r_unite = this.resolutionTypeNb == ResolutionTypesEnum.GOAL ? this.unite : "fois" 
@@ -125,6 +133,5 @@ export class CreateResolutionPage implements OnInit {
     });
     toast.present();
   }
-
 
 }
