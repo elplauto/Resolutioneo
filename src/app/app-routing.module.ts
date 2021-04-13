@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'logs-page',
     loadChildren: () => import('./logs-page/logs-page.module').then( m => m.LogsPagePageModule)
+  },
+  {
+    path: 'choose-resolution-origin',
+    loadChildren: () => import('./choose-resolution-origin/choose-resolution-origin.module').then( m => m.ChooseResolutionOriginPageModule)
   }
 ];
 

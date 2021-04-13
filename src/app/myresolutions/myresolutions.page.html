@@ -9,25 +9,21 @@
 
 <ion-content>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed" [routerLink]="['/choose-resolution-type']" (click)="addLog('Clic fab add')">
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" [routerLink]="['/choose-resolution-origin']" (click)="addLog('Clic fab add')">
     <ion-fab-button color="primary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-list>
-    <ion-item *ngFor="let resolution of resolutions" [routerLink]="['/details', resolution]" lines="none">
-      <ion-card>
-        <ion-img [src]="resolution.image"></ion-img>
-        <ion-card-header>
-          <ion-card-title>{{resolution.nom}}</ion-card-title>
-        </ion-card-header>
-        <ion-card-content *ngIf="resolution.type != 3">
-            {{placeholders.progression[resolution.type]}} {{resolution.periodiciteString}} : {{resolution.progression.actuel}} / {{resolution.progression.objectif}} {{resolution.progression.unite}}
-          <ion-progress-bar [value]="resolution.progress"></ion-progress-bar>
-        </ion-card-content>
-      </ion-card>
-    </ion-item>
-  </ion-list>
+  <ion-card *ngFor="let resolution of resolutions" [routerLink]="['/details', resolution]">
+    <ion-img [src]="resolution.image"></ion-img>
+    <ion-card-header>
+      <ion-card-title>{{resolution.nom}}</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="resolution.type != 3">
+        {{placeholders.progression[resolution.type]}} {{resolution.periodiciteString}} : {{resolution.progression.actuel}} / {{resolution.progression.objectif}} {{resolution.progression.unite}}
+      <ion-progress-bar [value]="resolution.progress"></ion-progress-bar>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

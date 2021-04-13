@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FriendsService } from '../api/friends.service';
+import { Friend } from '../model/Friend';
 
 @Component({
   selector: 'app-friends',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FriendsPage implements OnInit {
 
-  constructor() { }
+  friends: Friend[]
+
+  constructor(public friendsService: FriendsService) { }
 
   ngOnInit() {
+  }
+
+  async ionViewDidEnter() {
+    this.loadFriends();
+  }
+
+  async loadFriends() {
+    try {
+      let friends = await this.friendsService.getFriends()
+      this.friends = friends
+    } catch(err) {
+      console.log(err)
+    }
   }
 
 }
