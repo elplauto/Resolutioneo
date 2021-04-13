@@ -26,9 +26,13 @@ export class SettingsPage implements OnInit {
     this.presentToast("Groupes réinitialisés avec succès");
   }
 
+  async resetLogs() {
+    await this.storage.remove("logs");
+    this.presentToast("Logs réinitialisés avec succès");
+  }
+
   async resetAll() {
-    await this.storage.remove("resolutions");
-    await this.storage.remove("groups");
+    await this.storage.clear();
     this.presentToast("Données réinitialisées avec succès");
   }
 

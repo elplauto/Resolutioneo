@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Storage } from '@ionic/storage-angular';
 import { ResolutionTypeService } from '../api/resolution-type.service';
+import { Log } from '../model/Log';
 import { ResolutionType } from '../model/ResolutionType';
 
 @Component({
@@ -13,7 +15,7 @@ export class ChooseResolutionTypePage implements OnInit {
   resolutionTypeService: ResolutionTypeService
   resolutionTypes: ResolutionType[]
 
-  constructor(private route: Router) { }
+  constructor(private route: Router, private storage: Storage) { }
 
   ngOnInit() {
     this.loadResolutionTypes();
@@ -27,6 +29,15 @@ export class ChooseResolutionTypePage implements OnInit {
     } catch(err) {
       console.log(err)
     }
+  }
+
+  async addLog(message) {
+    let logs: Log[] = await this.storage.get('logs');
+    if (!logs) {
+      logs = [];
+    }
+    logs.push(new Log(message));
+    await this.storage.set('logs', logs);
   }
 
 }

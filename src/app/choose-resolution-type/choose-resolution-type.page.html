@@ -9,7 +9,7 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let type of resolutionTypes; let i = index" [routerLink]="['/create-resolution', i]" lines="none">
+    <ion-item *ngFor="let type of resolutionTypes; let i = index" [routerLink]="['/create-resolution', i]" lines="none" (click)="addLog('Choix resolution type '+ i)">
       <ion-card [color]="type.color">
         <ion-card-header>
             <ion-row class="ion-align-items-center">

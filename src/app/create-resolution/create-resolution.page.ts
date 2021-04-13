@@ -7,6 +7,7 @@ import { Resolution } from '../model/Resolution';
 import { ResolutionTypesEnum } from '../model/ResolutionTypesEnum';
 import { Storage } from '@ionic/storage-angular';
 import { ToastController } from '@ionic/angular';
+import { Log } from '../model/Log';
 
 @Component({
   selector: 'app-create-resolution',
@@ -64,6 +65,8 @@ export class CreateResolutionPage implements OnInit {
   }
 
   checkForm() {
+    this.addLog("Clic bouton créer")
+
     if (!this.nom) {
       this.presentToast("Nom de la résolution non renseigné", "danger");
     } else if (!this.objectif && this.resolutionTypeNb != 3) {
@@ -73,6 +76,7 @@ export class CreateResolutionPage implements OnInit {
     } else if (!this.initial && this.resolutionTypeNb == 0) {
       this.presentToast("Point de départ non renseigné", "danger");
     } else {
+      this.addLog("Résolution créée");
       this.createResolution();
     }
   }
@@ -132,6 +136,15 @@ export class CreateResolutionPage implements OnInit {
       color: color
     });
     toast.present();
+  }
+
+  async addLog(message) {
+    let logs: Log[] = await this.storage.get('logs');
+    if (!logs) {
+      logs = [];
+    }
+    logs.push(new Log(message));
+    await this.storage.set('logs', logs);
   }
 
 }

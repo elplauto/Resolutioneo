@@ -14,6 +14,8 @@
     </ion-card-header>
   </ion-card>
 
+  <ion-button color="success" expand="block" [routerLink]="['/logs-page']">Show logs</ion-button>
+  <ion-button color="danger" expand="block" (click)="resetLogs()">Reset logs</ion-button>
   <ion-button color="danger" expand="block" (click)="resetResolutions()">Reset resolutions</ion-button>
   <ion-button color="danger" expand="block" (click)="resetGroups()">Reset groups</ion-button>
   <ion-button color="danger" expand="block" (click)="resetAll()">Reset all</ion-button>

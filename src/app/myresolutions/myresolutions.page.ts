@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ResolutionsService } from '../api/resolutions.service';
 import { Resolution } from '../model/Resolution';
 import { Storage } from '@ionic/storage-angular';
+import { Log } from '../model/Log';
 
 @Component({
   selector: 'app-myresolutions',
@@ -42,6 +43,15 @@ export class MyresolutionsPage implements OnInit {
         this.resolutions.push(createdResolutions[i]);
       }
     }
+  }
+
+  async addLog(message) {
+    let logs: Log[] = await this.storage.get('logs');
+    if (!logs) {
+      logs = [];
+    }
+    logs.push(new Log(message));
+    await this.storage.set('logs', logs);
   }
 
 }

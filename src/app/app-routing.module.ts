@@ -30,6 +30,10 @@ const routes: Routes = [
   {
     path: 'create-resolution/:id',
     loadChildren: () => import('./create-resolution/create-resolution.module').then( m => m.CreateResolutionPageModule)
+  },
+  {
+    path: 'logs-page',
+    loadChildren: () => import('./logs-page/logs-page.module').then( m => m.LogsPagePageModule)
   }
 ];
 
