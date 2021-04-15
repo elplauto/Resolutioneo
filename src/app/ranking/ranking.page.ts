@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage-angular';
 import { FriendsService } from '../api/friends.service';
 import { Friend } from '../model/Friend';
 import { Log } from '../model/Log';
