@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FriendsService } from '../api/friends.service';
 import { Friend } from '../model/Friend';
+import { Log } from '../model/Log';
 
 @Component({
   selector: 'app-ranking',
@@ -11,13 +12,14 @@ export class RankingPage implements OnInit {
 
   friends: Friend[]
 
-  constructor(public friendsService: FriendsService) { }
+  constructor(public friendsService: FriendsService, private storage: Storage) { }
 
   ngOnInit() {
   }
 
   async ionViewDidEnter() {
     this.loadFriends();
+    this.addLog("clic page explorer");
   }
 
   async loadFriends() {
@@ -34,6 +36,15 @@ export class RankingPage implements OnInit {
 
   sortByPoints(a: Friend, b: Friend) {
     return b.points - a.points;
+  }
+
+  async addLog(message) {
+    let logs: Log[] = await this.storage.get('logs');
+    if (!logs) {
+      logs = [];
+    }
+    logs.push(new Log(message));
+    await this.storage.set('logs', logs);
   }
 
 }

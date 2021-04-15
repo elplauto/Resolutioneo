@@ -15,15 +15,14 @@
     <ion-searchbar></ion-searchbar>
   </ion-toolbar>
 
-  <ion-item>
-    <ion-fab-button color="primary" size="small" [routerLink]="['/create-group']">
+  <ion-item lines="none">
+    <ion-fab-button color="primary" size="small" [routerLink]="['/create-group']" (click)="addLog('clic btn creer groupe')">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
     <ion-label>
       Créer groupe
     </ion-label>
   </ion-item>
-  
 
   <ion-list>
     <ion-list-header>

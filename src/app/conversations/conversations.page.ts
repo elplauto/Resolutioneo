@@ -6,6 +6,7 @@ import { Group } from '../model/Group';
 import { GroupsService } from '../api/groups.service';
 import { Storage } from '@ionic/storage-angular';
 import { ToastController } from '@ionic/angular';
+import { Log } from '../model/Log';
 
 @Component({
   selector: 'app-conversations',
@@ -23,6 +24,7 @@ export class ConversationsPage implements OnInit {
 
   ngOnInit() {
     this.storage.create();
+    this.addLog("clic page conversations");
   }
 
   async ionViewDidEnter() {
@@ -98,6 +100,15 @@ export class ConversationsPage implements OnInit {
       color: color
     });
     toast.present();
+  }
+
+  async addLog(message) {
+    let logs: Log[] = await this.storage.get('logs');
+    if (!logs) {
+      logs = [];
+    }
+    logs.push(new Log(message));
+    await this.storage.set('logs', logs);
   }
 
 }
