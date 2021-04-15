@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Conversations</ion-title>
+  </ion-toolbar>
+</ion-header>
+  
+
+<ion-content>
+
+  <!-- Searchbar in a Toolbar -->
+  <ion-toolbar>
+    <ion-searchbar></ion-searchbar>
+  </ion-toolbar>
+
+  <ion-item>
+    <ion-fab-button color="primary" size="small" [routerLink]="['/create-group']">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+    <ion-label>
+      Créer groupe
+    </ion-label>
+  </ion-item>
+  
+
+  <ion-list>
+    <ion-list-header>
+      Conversations Récentes
+    </ion-list-header>
+
+    <ion-item *ngFor="let conv of conversations" (click)="presentToast('Fonctionnalité non implémentée', 'danger')">
+      <ion-avatar slot="start">
+        <img [src]="conv.image">
+      </ion-avatar>
+      <ion-label>
+        <h2>{{conv.nom}}</h2>
+        <p>{{conv.lastMsg.preview}}</p>
+      </ion-label>
+      <ion-badge *ngIf="conv.nbNotifs > 0" slot="end" color="danger">{{conv.nbNotifs}}</ion-badge>
+    </ion-item>
+
+  </ion-list>
+
+</ion-content>

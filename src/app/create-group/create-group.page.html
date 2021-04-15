@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Création groupe</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card>
+    <ion-item>
+      <ion-label position="stacked">Nom du groupe</ion-label>
+      <ion-input type="text" [(ngModel)]="nom" placeholder="Nom du groupe"></ion-input>
+    </ion-item>
+  </ion-card>
+
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="block" (click)="checkForm()">CRÉER</ion-button>
+</ion-footer>

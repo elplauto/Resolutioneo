@@ -1,5 +1,5 @@
 {
-  "appId": "io.ionic.starter",
+  "appId": "fr.elplauto.resolutioneo",
   "appName": "Resolutioneo",
   "bundledWebRuntime": false,
   "npmClient": "npm",

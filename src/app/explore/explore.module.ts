@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { MygroupsPageRoutingModule } from './mygroups-routing.module';
+import { ExplorePageRoutingModule } from './explore-routing.module';
 
-import { MygroupsPage } from './mygroups.page';
+import { ExplorePage } from './explore.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    MygroupsPageRoutingModule
+    ExplorePageRoutingModule
   ],
-  declarations: [MygroupsPage]
+  declarations: [ExplorePage]
 })
-export class MygroupsPageModule {}
+export class ExplorePageModule {}

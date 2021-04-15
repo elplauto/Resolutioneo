@@ -65,7 +65,7 @@ export class CreateResolutionPage implements OnInit {
   }
 
   checkForm() {
-    this.addLog("Clic bouton créer")
+    this.addLog("Clic bouton créer résolution")
 
     if (!this.nom) {
       this.presentToast("Nom de la résolution non renseigné", "danger");

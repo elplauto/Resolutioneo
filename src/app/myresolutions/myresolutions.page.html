@@ -9,13 +9,13 @@
 
 <ion-content>
 
-  <ion-fab horizontal="end" vertical="bottom" slot="fixed" [routerLink]="['/choose-resolution-origin']" (click)="addLog('Clic fab add')">
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" [routerLink]="['/choose-resolution-type']" (click)="addLog('Clic fab add')">
     <ion-fab-button color="primary">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-card *ngFor="let resolution of resolutions" [routerLink]="['/details', resolution]">
+  <ion-card *ngFor="let resolution of resolutions" (click)="presentToast('Fonctionnalité non implémentée', 'danger')">
     <ion-img [src]="resolution.image"></ion-img>
     <ion-card-header>
       <ion-card-title>{{resolution.nom}}</ion-card-title>

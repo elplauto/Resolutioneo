@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Classement</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-list>
+    <div *ngFor="let friend of friends">
+      <ion-item color="success" *ngIf="friend.nom === 'Vous'">
+        <ion-label>
+          {{friend.nom}}
+        </ion-label>
+        <ion-badge slot="end">{{friend.points}}</ion-badge>
+      </ion-item>
+      <ion-item *ngIf="friend.nom !== 'Vous'">
+        <ion-label>
+          {{friend.nom}}
+        </ion-label>
+        <ion-badge slot="end">{{friend.points}}</ion-badge>
+      </ion-item>
+    </div>
+  </ion-list>
+
+</ion-content>

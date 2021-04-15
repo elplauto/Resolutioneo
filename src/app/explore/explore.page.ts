@@ -1,19 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage-angular';
+import { ToastController } from '@ionic/angular';
 import { Log } from '../model/Log';
 
 @Component({
-  selector: 'app-choose-resolution-origin',
-  templateUrl: './choose-resolution-origin.page.html',
-  styleUrls: ['./choose-resolution-origin.page.scss'],
+  selector: 'app-explore',
+  templateUrl: './explore.page.html',
+  styleUrls: ['./explore.page.scss'],
 })
-export class ChooseResolutionOriginPage implements OnInit {
+export class ExplorePage implements OnInit {
 
   constructor(private storage: Storage,public toastController: ToastController) { }
 
-  async ngOnInit() {
-    await this.storage.create();
+  ngOnInit() {
+    this.storage.create();
+  }
+
+  async ionViewDidEnter() {
+    this.presentToast("Page non implémentée", "danger");
+    this.addLog("clic page explorer");
   }
 
   async presentToast(message, color) {
@@ -34,9 +39,5 @@ export class ChooseResolutionOriginPage implements OnInit {
     await this.storage.set('logs', logs);
   }
 
-  explore() {
-    this.addLog("Choix resolution existante");
-    this.presentToast("Fonctionnalité non implémentée", "danger");
-  }
-
 }
+

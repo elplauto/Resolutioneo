@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { ChooseResolutionOriginPage } from './choose-resolution-origin.page';
+import { RankingPage } from './ranking.page';
 
-describe('ChooseResolutionOriginPage', () => {
-  let component: ChooseResolutionOriginPage;
-  let fixture: ComponentFixture<ChooseResolutionOriginPage>;
+describe('RankingPage', () => {
+  let component: RankingPage;
+  let fixture: ComponentFixture<RankingPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ ChooseResolutionOriginPage ],
+      declarations: [ RankingPage ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(ChooseResolutionOriginPage);
+    fixture = TestBed.createComponent(RankingPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

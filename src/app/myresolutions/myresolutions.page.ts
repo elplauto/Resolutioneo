@@ -4,6 +4,7 @@ import { ResolutionsService } from '../api/resolutions.service';
 import { Resolution } from '../model/Resolution';
 import { Storage } from '@ionic/storage-angular';
 import { Log } from '../model/Log';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-myresolutions',
@@ -18,11 +19,10 @@ export class MyresolutionsPage implements OnInit {
     progression: ["Progression", "Progression", "Limite", null]
   }
 
-  constructor(private route: Router, private activatedRoute: ActivatedRoute, private storage: Storage) {}
+  constructor(private route: Router, private activatedRoute: ActivatedRoute, private storage: Storage, public toastController: ToastController) {}
 
   async ngOnInit() {
     await this.storage.create();
-    this.loadResolutions();
   }
 
   async ionViewDidEnter() {
@@ -30,18 +30,17 @@ export class MyresolutionsPage implements OnInit {
   }
 
   async loadResolutions() {
+    this.resolutions = [];
     this.resolutionsService = new ResolutionsService();
     try {
-      let resolutions = await this.resolutionsService.getResolutions()
-      this.resolutions = resolutions
+      let resolutionsTemp = await this.resolutionsService.getResolutions()
+      this.resolutions.push(...resolutionsTemp);
     } catch(err) {
       console.log(err)
     }
     let createdResolutions = await this.storage.get('resolutions');
     if (createdResolutions) {
-      for (let i = 0; i < createdResolutions.length; i++) {
-        this.resolutions.push(createdResolutions[i]);
-      }
+      this.resolutions.push(...createdResolutions);
     }
   }
 
@@ -52,6 +51,15 @@ export class MyresolutionsPage implements OnInit {
     }
     logs.push(new Log(message));
     await this.storage.set('logs', logs);
+  }
+
+  async presentToast(message, color) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      color: color
+    });
+    toast.present();
   }
 
 }
