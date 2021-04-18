@@ -15,6 +15,16 @@
     </ion-fab-button>
   </ion-fab>
 
+  <ion-card>
+    <ion-item>
+      <ion-label>Trier par</ion-label>
+      <ion-select [(ngModel)]=sortCmb (ionChange)="sortResol()">
+        <ion-select-option value='priority'>Priorité</ion-select-option>
+        <ion-select-option value='category'>Catégorie</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
   <ion-card *ngFor="let resolution of resolutions" (click)="presentToast('Fonctionnalité non implémentée', 'danger')">
     <ion-img [src]="resolution.image"></ion-img>
     <ion-card-header>

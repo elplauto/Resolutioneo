@@ -15,6 +15,8 @@ export class MyresolutionsPage implements OnInit {
   resolutionsService: ResolutionsService
   resolutions: Resolution[]
 
+  sortCmb: string = 'priority';
+
   placeholders: any = {
     progression: ["Progression", "Progression", "Limite", null]
   }
@@ -42,6 +44,7 @@ export class MyresolutionsPage implements OnInit {
     if (createdResolutions) {
       this.resolutions.push(...createdResolutions);
     }
+    this.sortResol();
   }
 
   async addLog(message) {
@@ -60,6 +63,25 @@ export class MyresolutionsPage implements OnInit {
       color: color
     });
     toast.present();
+  }
+
+  sortResol() {
+    switch(this.sortCmb.toString()) {
+      case 'category':
+        this.resolutions.sort(this.sortByCategory)
+        break;
+      case 'priority':
+        this.resolutions.sort(this.sortByPriority)
+        break;
+    }
+  }
+
+  sortByCategory(a: Resolution, b: Resolution) {
+    return a.categorie - b.categorie;
+  }
+
+  sortByPriority(a: Resolution, b: Resolution) {
+    return b.priorite - a.priorite;
   }
 
 }
