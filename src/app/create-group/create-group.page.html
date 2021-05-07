@@ -27,21 +27,25 @@
 
   <ion-card>
     <ion-item>
-      <ion-label>Ajouter des amis</ion-label>
-      <ion-button expand="block" (click)="addFriend()">AJOUTER</ion-button>
-    </ion-item>
-    <ion-item *ngIf="nbAmi > 0">
-      <ion-item *ngFor="let a of amiAjoute;">
-        <ion-label>{{a.nom}}</ion-label>
-      </ion-item>
+      <ion-label>Activer les notifications</ion-label>
+      <ion-toggle [(ngModel)]="notificationOn"></ion-toggle>
     </ion-item>
   </ion-card>
 
   <ion-card>
     <ion-item>
-      <ion-label>Activer les rappels</ion-label>
-      <ion-toggle [(ngModel)]="notificationOn"></ion-toggle>
+      <ion-label>Ajouter des amis</ion-label>
+      <ion-button slot="end" (click)="addFriend()"> + </ion-button>
     </ion-item>
+    
+
+    <ion-list *ngIf="nbAmi > 0">
+      <ion-item *ngFor="let a of amiAjoute;">
+        <ion-label>{{a.nom}}</ion-label>
+        <ion-button color="danger" slot="end" (click)="delFriend(a)"> - </ion-button>
+      </ion-item>
+    </ion-list>
+
   </ion-card>
 
 </ion-content>

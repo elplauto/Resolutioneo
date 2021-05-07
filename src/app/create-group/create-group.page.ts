@@ -57,19 +57,26 @@ export class CreateGroupPage implements OnInit {
           text: 'Ok',
           handler: data => {
             this.amiAjoute.push(...data);
+            //Faut supprimer les amis deja dans la liste --- le filter fonctionne pas ?
+            this.amiAjoute.filter((value, index, self) => index === self.indexOf(value));
             this.nbAmi = this.amiAjoute.length;
           }
         }
       ]
     };
 
-    // Now we add the radio buttons
     for(let i=0; i< this.friends.length; i++) {
       options.inputs.push({ name : 'check', value: this.friends[i], label: this.friends[i].nom, type: 'checkbox' });
     }
 
     const alert = await this.alertController.create(options);
     await alert.present();
+  }
+
+  async delFriend(friend: Friend) {
+    this.amiAjoute.splice(this.amiAjoute.indexOf(friend), 1);
+    this.nbAmi--;
+    console.log(this.amiAjoute);
   }
 
   checkForm() {
