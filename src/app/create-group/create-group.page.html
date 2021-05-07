@@ -16,6 +16,34 @@
     </ion-item>
   </ion-card>
 
+  <ion-card>
+    <ion-item>
+      <ion-label>Catégorie</ion-label>
+      <ion-select [(ngModel)]=selectedCategorie cancelText="Annuler">
+        <ion-select-option *ngFor="let categorie of categories; let i = index" [value]=i>{{categorie}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Ajouter des amis</ion-label>
+      <ion-button expand="block" (click)="addFriend()">AJOUTER</ion-button>
+    </ion-item>
+    <ion-item *ngIf="nbAmi > 0">
+      <ion-item *ngFor="let a of amiAjoute;">
+        <ion-label>{{a.nom}}</ion-label>
+      </ion-item>
+    </ion-item>
+  </ion-card>
+
+  <ion-card>
+    <ion-item>
+      <ion-label>Activer les rappels</ion-label>
+      <ion-toggle [(ngModel)]="notificationOn"></ion-toggle>
+    </ion-item>
+  </ion-card>
+
 </ion-content>
 
 <ion-footer>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Storage } from '@ionic/storage-angular';
-import { ToastController } from '@ionic/angular';
+import { AlertController, ToastController } from '@ionic/angular';
 import { Log } from '../model/Log';
 import { Group } from '../model/Group';
+import { Category } from '../model/Category';
+import { Friend } from '../model/Friend';
+import { FriendsService } from '../api/friends.service';
 
 @Component({
   selector: 'app-create-group',
@@ -12,27 +15,70 @@ import { Group } from '../model/Group';
 })
 export class CreateGroupPage implements OnInit {
 
-  constructor(private route: Router, private activatedRoute: ActivatedRoute, private storage: Storage,public toastController: ToastController) {}
-
   nom: string;
+  selectedCategorie: number = 0;
+  notificationOn : boolean = true;
+  friends: Friend[]
+  amiAjoute: Friend[]
+  nbAmi: number = 0;
+
+  categories: String[] = Object.keys(Category).filter(k => typeof Category[k as any] === "number");
+
+  constructor(public friendsService: FriendsService, private route: Router, private activatedRoute: ActivatedRoute, private storage: Storage, public toastController: ToastController, public alertController: AlertController) {}
 
   ngOnInit() {
     this.storage.create();
+    this.loadFriends();
+  }
+
+  async loadFriends() {
+
+    // load friends
+    this.friends = [];
+    let friendsTemp = await this.friendsService.getFriends();
+    this.friends.push(...friendsTemp);
+
+    this.amiAjoute = [];
+  }
+
+  async addFriend() {
+    var options = {
+      inputs: [],
+      header: 'Amis',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.amiAjoute.push(...data);
+            this.nbAmi = this.amiAjoute.length;
+          }
+        }
+      ]
+    };
+
+    // Now we add the radio buttons
+    for(let i=0; i< this.friends.length; i++) {
+      options.inputs.push({ name : 'check', value: this.friends[i], label: this.friends[i].nom, type: 'checkbox' });
+    }
+
+    const alert = await this.alertController.create(options);
+    await alert.present();
   }
 
   checkForm() {
     this.addLog("Clic bouton créer groupe")
 
-    // TO DO : Verifier que tous les champs sont bien remplis
     if (!this.nom) {
       this.presentToast("Nom du groupe non renseigné", "danger");
-    } /*else if (!this.objectif && this.resolutionTypeNb != 3) {
-      this.presentToast(this.placeholders.objectifTitre[this.resolutionTypeNb] + " non renseigné", "danger");
-    } else if (!this.unite && this.resolutionTypeNb == 0) {
-      this.presentToast("Unit énon renseignée", "danger");
-    } else if (!this.initial && this.resolutionTypeNb == 0) {
-      this.presentToast("Point de départ non renseigné", "danger");
-    }*/ else {
+    }
+    else {
       this.addLog("Groupe créé");
       this.createGroup();
     }

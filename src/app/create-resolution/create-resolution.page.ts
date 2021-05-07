@@ -72,7 +72,7 @@ export class CreateResolutionPage implements OnInit {
     } else if (!this.objectif && this.resolutionTypeNb != 3) {
       this.presentToast(this.placeholders.objectifTitre[this.resolutionTypeNb] + " non renseigné", "danger");
     } else if (!this.unite && this.resolutionTypeNb == 0) {
-      this.presentToast("Unit énon renseignée", "danger");
+      this.presentToast("Unité non renseignée", "danger");
     } else if (!this.initial && this.resolutionTypeNb == 0) {
       this.presentToast("Point de départ non renseigné", "danger");
     } else {
